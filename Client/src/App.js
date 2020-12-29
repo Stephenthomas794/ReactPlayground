@@ -4,12 +4,14 @@ import React, {Component} from 'react';
 import Person from './Person/Person';
 
 class App extends Component{
+
 state = {
     person:[
         {name: 'Alex', age: 28},
         {name: 'Jeff', age: 29},
         {name: 'Jacon', age: 30}
-    ]
+    ],
+    showPersons: false
 }
 
 switchNameHandler = (newName) => {
@@ -32,6 +34,12 @@ nameChangedHandler = (event) => {
         ]
     })
 }
+
+togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow})
+}
+
 render() {
     const style = {
         backgroundColor: 'white',
@@ -40,13 +48,24 @@ render() {
         padding: '8px',
         cursor: 'pointer'
         };
+let persons = null;
 
+if (this.state.showPersons){
+      persons = (
+      <div >
+            <h> Hello how are you </h> 
+        </div> 
+    );
+}
   return (
     <div className="App">
         <button 
             style= {style}
             onClick={this.switchNameHandler.bind(this, 'Kach')}> Switch Name</button>
-        <h> HEllo World </h>
+        <button style ={style}
+        onClick = {this.togglePersonsHandler}> Toggle</button>
+      <h> HEllo World </h>
+        {persons}
         <Person name={this.state.person[0].name} age={this.state.person[0].age}/> 
         <Person name={this.state.person[1].name} 
                 age={this.state.person[1].age} 
